@@ -13,21 +13,14 @@ app.use(express.json());
 
 const port = 5000 || process.env.PORT;
 
-const tickers = ['Aple', 'Microsoft', 'Facebook'];
-// const tickers = [
-// 	{
-// 		ticker: 'Apple',
-// 		openingPrice: null,
-// 	},
-// 	{
-// 		ticker: 'Microsoft',
-// 		openingPrice: null,
-// 	},
-// 	{
-// 		ticker: 'Facebook',
-// 		openingPrice: null,
-// 	},
-// ];
+const tickers = [
+	'Aple',
+	'Microsoft',
+	'Facebook',
+	'Netflix',
+	'Google',
+	'Tesla',
+];
 
 for (let i = 0; i < tickers.length; i++) {
 	const newOpening = new OpeningPrice({
@@ -64,18 +57,7 @@ const genRandom = async () => {
 					{ price: random.int(1, 10) },
 					{ upsert: true }
 				);
-			// console.log(updatedStock)
-			// const foundStock =
-			// 	await OpeningPrice.findOne({
-			// 		id: tickers[i],
-			// 	});
-			// const updatedStock =
-			// 	await foundStock.updateOne(
-			// 		{
-			// 			price: random.int(1, 10),
-			// 		},
-			// 		{ new: true }
-			// 	);
+
 			const updatedStockData =
 				await OpeningPrice.findOneAndUpdate(
 					{ id: tickers[i] },
@@ -93,79 +75,10 @@ const genRandom = async () => {
 		} catch (error) {
 			console.log(error);
 		}
-		// const newStock = new Stock({
-		// 	price: random.int(1, 10),
-		// 	ticker: tickers[i],
-		// 	id: tickers[i],
-		// });
-
-		// newStock
-		// 	.save()
-		// 	.then((data) => {
-		// 		console.log(data),
-		// 			res.status(200).json({
-		// 				message: 'Blog Sucessfully created',
-		// 				success: true,
-		// 				data: data,
-		// 			});
-		// 	})
-		// 	.catch((err) => {
-		// 		res.status(500).json({
-		// 			message: 'Blog not created',
-		// 			success: false,
-		// 			data: err,
-		// 		});
-		// 	});
 	}
 };
 
-// const genRandom = () => {
-// 	for (let i = 0; i < tickers.length; i++) {
-// 		const newStock = new Stock({
-// 			price: random.int(1, 10),
-// 			ticker: tickers[i],
-// 			id: tickers[i],
-// 		});
-
-// 		newStock
-// 			.save()
-// 			.then((data) => {
-// 				console.log(data),
-// 					res.status(200).json({
-// 						message: 'Blog Sucessfully created',
-// 						success: true,
-// 						data: data,
-// 					});
-// 			})
-// 			.catch((err) => {
-// 				res.status(500).json({
-// 					message: 'Blog not created',
-// 					success: false,
-// 					data: err,
-// 				});
-// 			});
-// 	}
-// };
-
 setInterval(genRandom, 1000);
-
-// app.get('/', (req, res) => {
-// 	Stock.find()
-// 		.then((data) => {
-// 			res.status(200).json({
-// 				message: 'Blog Sucessfully retrieved',
-// 				success: true,
-// 				data: data,
-// 			});
-// 		})
-// 		.catch((err) => {
-// 			res.status(500).json({
-// 				message: 'Blog not retrieved',
-// 				success: false,
-// 				data: err,
-// 			});
-// 		});
-// });
 
 app.get('/openingPrice', (req, res) => {
 	OpeningPrice.find()
