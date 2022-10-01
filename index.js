@@ -22,6 +22,8 @@ const tickers = [
 	'Tesla',
 ];
 
+//git conflict testting
+
 for (let i = 0; i < tickers.length; i++) {
 	const newOpening = new OpeningPrice({
 		openingPrice: random.int(1, 10),
