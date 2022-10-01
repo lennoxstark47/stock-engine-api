@@ -23,6 +23,7 @@ const tickers = [
 ];
 
 //git conflict testting
+//git successfully added on feluda's lappy
 
 for (let i = 0; i < tickers.length; i++) {
 	const newOpening = new OpeningPrice({
